@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{longtable}
+\usepackage[parfill]{parskip}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{document}
+
+{\bf Invoice ID:} ${id} \\
+{\bf Date:} \today \\
+
+${name} \\
+${address} \hfill ${email}
+\\ \\
+{\bf Invoice To:} \\
+${rcpt}
+
+\vspace{1em}
+
+{\bf Expenses:}
+
+\begin{longtable}{ l r }
+\hline
+${expenses}
+\hline
+${totals}
+\end{longtable}
+
+\vspace{2em}
+
+\end{document}
