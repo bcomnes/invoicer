@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "concat-stream": "~1.4.1",
-    "minimist": "~0.0.5",
+    "minimist": "~1.2.8",
     "mkdirp": "~0.3.5",
     "split": "~0.2.10",
     "sprintf": "~0.1.3",
