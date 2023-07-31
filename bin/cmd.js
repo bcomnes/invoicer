@@ -2,15 +2,16 @@
 
 const fs = require('fs')
 const path = require('path')
-const mkdirp = require('mkdirp')
 const split = require('split')
 const through2 = require('through2')
 const concat = require('concat-stream')
 const sprintf = require('sprintf')
 const spawn = require('child_process').spawn
-const strftime = require('strftime').strftimeUTC
+const strftimeExport = require('strftime')
 const os = require('os')
 const table = require('text-table')
+
+const strftimeUTC = strftimeExport.utc()
 
 function run () {
   const argv = require('minimist')(process.argv.slice(2), {
@@ -36,7 +37,7 @@ function run () {
   const configDir = (argv.c ? path.dirname(argv.c) : null) || path.join(
     process.env.HOME || process.env.USERDIR, '.config', 'invoicer'
   )
-  mkdirp.sync(configDir)
+  fs.mkdirSync(configDir, { recursive: true })
 
   const configFile = argv.c || path.join(configDir, 'config.json')
   if (!fs.existsSync(configFile)) {
@@ -100,7 +101,7 @@ function run () {
           acc.push('{\\bf ' + title + '} & ')
           row.hours.forEach(function (r) {
             acc.push(
-              strftime('%F', new Date(r.date)) +
+              strftimeUTC('%F', new Date(r.date)) +
                         ' & ' + r.hours + 'h * ' + row.rate
             )
           })
@@ -164,7 +165,7 @@ function run () {
     )
 
     const tmpdir = path.join(os.tmpdir(), 'invoicer-' + Math.random())
-    mkdirp.sync(tmpdir)
+    fs.mkdirSync(tmpdir, { recursive: true })
 
     if (/\.tex$/.test(outfile)) {
       return fs.writeFileSync(outfile, output)
