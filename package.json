@@ -1,7 +1,7 @@
 {
   "name": "@bret/invoicer",
   "description": "generate PDF invoices from json. Maintenance fork of substack/invoicer.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "bin": {
     "invoicer": "bin/cmd.js"
   },
